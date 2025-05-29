@@ -1,2 +1,4 @@
 WIDTH=1440
 HEIGHT=800
+rows=20
+cols=20

@@ -9,8 +9,8 @@ class Cell:
         
         self.button=create_button(
             parent=parent_frame,
-            width=4,
-            height=2,
+            width=2,
+            height=1,
             command=self.on_click
 
     )

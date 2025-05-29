@@ -1,5 +1,7 @@
 from tkinter import *
 from buttons import create_button
+from cells import Cell
+from board import Board
 import settings
 import utils
 
@@ -45,13 +47,19 @@ exit_button.place(
     anchor='s',
     y=-30
 )
+grid_frame=Frame (root)
+grid_frame.place(relx=0.5, rely=0.5, anchor='center')
+
+game_board = Board(grid_frame, settings.rows, settings.rows)
 
 play_button=create_button(
     top_frame,
     text='Play',
     width=25,
+    command=game_board.start_game
 
 )
 play_button.place(relx=0.5, rely=0.8, anchor='center')
+
 
 root.mainloop()
