@@ -47,10 +47,10 @@ exit_button.place(
     anchor='s',
     y=-30
 )
+
 grid_frame=Frame (root)
 grid_frame.place(relx=0.5, rely=0.5, anchor='center')
-
-game_board = Board(grid_frame, settings.rows, settings.rows)
+game_board = Board(grid_frame, settings.rows, settings.rows,50)
 
 play_button=create_button(
     top_frame,

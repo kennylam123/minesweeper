@@ -2,11 +2,13 @@ from buttons import create_button
 
 class Cell:
 
-    def __init__(self, parent_frame, is_mine=False):
-        self.is_mine=is_mine
+    def __init__(self, parent_frame, x, y):
+        self.x=x
+        self.y=y
+        self.is_mine=False
         self.is_flagged=False
         self.is_revealed=False
-        self.neighborMines=0
+        self.neighbor_bomb_count=0
         
         self.button=create_button(
             parent=parent_frame,
@@ -24,15 +26,25 @@ class Cell:
     def on_left_click(self,event=None): 
        if self.is_flagged or self.is_revealed:
            return
-       self.reveal()
+       if self.is_mine:
+           self.button.config(text='💣')
+           print('lost game')
+       else:
+           self.reveal()
+
+      
        print('leftclicked')
 
-    def on_right_click(self, event=None):
+    def on_right_click(self, event=None): #fix being able to flag a revealed bomb
         if self.is_revealed:
             return
+        
+        
         self.is_flagged= not self.is_flagged
+        if self.is_mine:
+            return
         if self.is_flagged:
-            self.button.config(text='F', fg='red')
+            self.button.config(text='🚩', fg='red')
             print('flagged')
         else:
             self.button.config(text='', fg='lightgray')
@@ -42,17 +54,17 @@ class Cell:
 
     def reveal(self):
         self.is_revealed=True
-        if self.neighborMines>0:
-            self.button.config(text=str(self.neighborMines))
-        else:
-             self.button.config(bg='lightgray')
-
-        if self.is_flagged or self.is_revealed:
-                return
-                
-        if self.is_mine: #lost game
-             self.button.config(
-                    
-            print('game over')    
-             )
-     
+        if self.neighbor_bomb_count > 0:
+            self.button.config(
+            text=str(self.neighbor_bomb_count),
+            bg="lightgray"
+        )
+        else: 
+            self.button.config(
+            text='',
+            bg="lightgray"
+        )
+             
+        
+             
+    
