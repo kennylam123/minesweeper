@@ -1,3 +1,4 @@
+import tkinter as tk
 from cells import Cell
 import settings
 import utils
@@ -48,6 +49,25 @@ class Board:
             if 0 <= nx < self.cols and 0 <= ny < self.rows:
                 neighbors.append(self.cells[ny][nx])
       return neighbors
+    
+    def game_over_popup(self):
+        popup = tk.Toplevel()
+        popup.title("Game Over")
+        popup.geometry("250x150")
+        popup.configure(bg="lightgray")
+
+        message = tk.Label(popup, text="You clicked a mine!", font=("Helvetica", 12), bg="lightgray")
+        message.pack(pady=10)
+
+        restart_button = tk.Button(
+            popup, 
+            text="Restart Game", 
+            command=lambda: [popup.destroy(), self.restart_game()]
+        )
+        restart_button.pack(pady=5)
+
+        quit_button = tk.Button(popup, text="Quit", command=self.parent.quit)
+        quit_button.pack(pady=5)
 
     def start_game(self):
       self.create_cells()

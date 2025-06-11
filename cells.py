@@ -24,7 +24,6 @@ class Cell:
         self.button.bind("<Button-1>", self.on_left_click)
         self.button.bind("<Button-3>", self.on_right_click)
 
-    
 
     def on_left_click(self,event=None): 
        if self.is_flagged or self.is_revealed:
@@ -32,6 +31,7 @@ class Cell:
        if self.is_mine:
            self.button.config(text='💣')
            print('lost game')
+           self.board_ref.game_over_popup
        else:
            self.reveal()
 

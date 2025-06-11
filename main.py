@@ -54,12 +54,19 @@ game_board = Board(grid_frame, settings.rows, settings.rows,50)
 
 play_button=create_button(
     top_frame,
-    text='Play',
+    text='New game',
     width=25,
     command=game_board.start_game
 
 )
-play_button.place(relx=0.5, rely=0.8, anchor='center')
+play_button.place(x=620, y=100, anchor='center')
 
+restart_button= create_button(
+    top_frame,
+    text="Reset",
+    width=25,
+    command=game_board.start_game
+)
+restart_button.place(x=820, y=100, anchor='center')
 
 root.mainloop()
